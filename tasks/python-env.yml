@@ -1,0 +1,33 @@
+- name: Install pyenv
+  become: true
+  become_user: denzel
+  shell: | 
+    rm -fr ~/.pyenv
+    curl https://pyenv.run | bash
+  tags:
+    - python
+
+- name: Install pyenv global 3.9.2
+  become: true
+  become_user: denzel
+  become_method: sudo
+  shell: |
+    . /home/denzel/.bashrc
+    /home/denzel/.pyenv/bin/pyenv install 3.9.2
+    /home/denzel/.pyenv/bin/pyenv global 3.9.2
+  tags:
+    - python
+
+- name: Install System Package (python3.8-venv)
+  become: true
+  apt:
+    name: ["python3.8-venv"]
+  tags:
+    - python
+
+- name: Install poetry
+  become: true
+  shell: curl -sSL https://install.python-poetry.org | python3 - --git https://github.com/python-poetry/poetry.git@master
+  become_user: denzel
+  tags:
+    - python

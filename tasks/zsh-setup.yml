@@ -1,0 +1,21 @@
+- name: Install ZSH
+  apt: name=zsh
+  tags: &tags_for_zsh_tasks [ 'install', 'productivity', 'dotfiles', 'zsh' ]
+    
+- name: Change shell to zsh
+  shell: chsh -s $(which zsh)
+  tags: *tags_for_zsh_tasks
+
+- name: Install oh-my-zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  tags: *tags_for_zsh_tasks
+  become_user: denzel
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+  tags: *tags_for_zsh_tasks
+
+- name: Update zshrc
+  shell: sed -i 's/(git/(git zsh-autosuggestions/' ~/.zshrc
