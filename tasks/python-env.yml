@@ -24,6 +24,7 @@
     name: ["python3.8-venv"]
   tags:
     - python
+    - poetry
 
 - name: Install poetry
   become: true
@@ -31,3 +32,4 @@
   become_user: denzel
   tags:
     - python
+    - poetry
