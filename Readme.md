@@ -24,6 +24,12 @@
 
 # Poetry 
 
+### Set .venv
+    Poetry makes it super easy to work with different Python versions or virtual environments. 
+    The recommended way to specify your Python version according to Poetry docs is poetry set env path 
+    - which python
+    - poetry env use `path to python env`
+
 ### If vs-code can't find venv need to recreate it and set path inside vs-code
 - poetry env list  # shows the name of the current environment
 - poetry env remove <current environment>
