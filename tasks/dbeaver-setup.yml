@@ -1,0 +1,25 @@
+- name: Download DBeaver
+  become: true
+  get_url:
+    url: https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
+    dest: /tmp/dbeaver.deb
+  tags:
+    - install
+    - dbeaver
+
+- name: Remove Any previous DBeaver
+  become: true
+  apt:
+    name: dbeaver-ce
+    state: absent
+  tags:
+    - install
+    - dbeaver
+
+- name: Install DBeaver .deb package
+  become: true
+  apt:
+    deb: /tmp/dbeaver.deb
+  tags:
+    - install
+    - dbeaver

@@ -6,7 +6,8 @@
     curl https://pyenv.run | bash
   tags:
     - python
-
+    - install
+    
 - name: Install pyenv global 3.9.2
   become: true
   become_user: denzel
@@ -17,6 +18,7 @@
     /home/denzel/.pyenv/bin/pyenv global 3.9.2
   tags:
     - python
+    - install
 
 - name: Install System Package (python3.8-venv)
   become: true
@@ -25,6 +27,7 @@
   tags:
     - python
     - poetry
+    - install
 
 - name: Install poetry
   become: true
@@ -33,3 +36,4 @@
   tags:
     - python
     - poetry
+    - install

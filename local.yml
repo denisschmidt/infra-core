@@ -18,3 +18,4 @@
     - include: tasks/brave-setup.yml
     - include: tasks/tools-setup.yml
     - include: tasks/python-env.yml
+    - include: tasks/dbeaver-setup.yml
