@@ -6,6 +6,7 @@ sudo apt purge nodejs npm
 rm /usr/local/lib/node_modules/n/bin/n
 rm /usr/local/bin/n
 rm /usr/local/bin/node
+rm -rf $NVM_DIR ~/.npm ~/.bower
 
 # Undo zsh
 uninstall_oh_my_zsh

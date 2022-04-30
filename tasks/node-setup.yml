@@ -1,45 +1,31 @@
-- name: Install node
-  apt: 
-    name: ['nodejs', 'npm']
+- name: Setup Node
+  become: yes
+  become_flags: -i
+  become_user: denzel
   tags:
-  - install
-  - node
+    - install
+    - node
+  block:
+    - name: Install nvm
+      shell: >
+        curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash
+      args:
+        executable: /bin/bash
+        chdir: "$HOME"
+        creates: "$HOME/.nvm/nvm.sh"
 
-- name: Install n
-  npm: 
-    name: n
-    global: true
-  tags:
-  - install
-  - node
+    - name: Setup .profile
+      lineinfile:
+        path: ~/.profile
+        line: source ~/.nvm/nvm.sh
+        create: yes
 
-- name: n 14
-  shell: n 14
-  tags:
-  - install
-  - node
-
-- name: npmjs prefix
-  shell: mkdir -p ~/.local/.npm-global
-  tags:
-  - install
-  - node
-
-- name: add npmjs to path
-  shell: PATH=~/.local/.npm-global/bin:$PATH
-  tags:
-  - install
-  - node
-
-- name: npmjs global settings
-  shell: npm config set prefix '~/.local/.npm-global'
-  tags:
-  - install
-  - node
-
-- name: npmjs global settings export path in case I don't have dotfiles installed
-  shell: export PATH=~/.local/.npm-global/bin:$PATH
-  tags:
-  - install
-  - node
-  - npm-path
+    - name: Install node
+      shell: |
+        source {{ ansible_env.HOME }}/.nvm/nvm.sh
+        nvm install {{node_ver}}
+      args:
+        executable: /bin/bash
+        chdir: "$HOME"
+        creates: "$HOME/.nvm/versions/node/v{{node_ver}}" 
+  
