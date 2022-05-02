@@ -1,21 +1,40 @@
 - name: Install ZSH
   apt: name=zsh
-  tags: &tags_for_zsh_tasks [ 'install', 'productivity', 'dotfiles', 'zsh' ]
-    
+  become: yes
+  become_flags: -i
+  become_user: denzel
+  tags: &tags_for_zsh_tasks [ 'install', 'zsh' ]
+
 - name: Change shell to zsh
+  become: yes
+  become_flags: -i
+  become_user: denzel
   shell: chsh -s $(which zsh)
   tags: *tags_for_zsh_tasks
 
-- name: Install oh-my-zsh
+- name: Check that the somefile.conf exists
+  become: yes
+  become_flags: -i
+  become_user: denzel
+  stat:
+    path: /home/denzel/.oh-my-zsh
+  register: oh_my_stats
+  tags: *tags_for_zsh_tasks
+
+- name: Install Oh-My-Zsh
+  become: yes
+  become_flags: -i
+  become_user: denzel
   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
   tags: *tags_for_zsh_tasks
+  when: oh_my_stats.stat.exists == False
   become_user: denzel
 
 - name: Install zsh-autosuggestions
+  become: yes
+  become_flags: -i
+  become_user: denzel
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags: *tags_for_zsh_tasks
-
-- name: Update zshrc
-  shell: sed -i 's/(git/(git zsh-autosuggestions/' ~/.zshrc

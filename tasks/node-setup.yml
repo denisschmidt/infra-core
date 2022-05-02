@@ -28,4 +28,3 @@
         executable: /bin/bash
         chdir: "$HOME"
         creates: "$HOME/.nvm/versions/node/v{{node_ver}}" 
-  

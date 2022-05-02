@@ -20,7 +20,17 @@
 - tar -zxf 
 - sudo dpkg -i /path/to/deb/file
 - sudo apt-get install -f
-
+- fg 
+- cd ~
+- pushd popd
+- htop
+- history
+- !command_id
+- ls -l
+- tail -f /var/log/syslog
+- truncate -s 0 hello.txt remove content of the file
+- mount | column -t
+- apt update; apt dist-upgrade 
 
 # Poetry 
 
