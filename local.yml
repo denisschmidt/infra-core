@@ -1,6 +1,9 @@
 - hosts: localhost
   vars:
     node_ver: "16.15.0"
+    source_key: "./.ssh/id_rsa"
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    personal: "{{ lookup('env', 'HOME') }}/work"
   pre_tasks:
   - name: Update Apt
     become: true
@@ -20,3 +23,4 @@
     - include: tasks/tools-setup.yml
     - include: tasks/python-env.yml
     - include: tasks/dbeaver-setup.yml
+    - include: tasks/neovim-setup.yml
