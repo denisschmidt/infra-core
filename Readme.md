@@ -73,3 +73,31 @@ The recommended way to specify your Python version according to Poetry docs is p
 - shift + a - move cursor on the first char in the right side
 - o - insert the new line below line and go into insert mode
 - O - insert the new line above line and go into insert mode
+
+
+## Tmux
+- tmux => run it
+- tmux list-sessions 
+- tmux kill-server
+- tmux new-session -d -s "this is session name"
+- tmux a => touch session
+
+- tmux prefix + (0-9) => use next session
+- tmux prefix + w => show list of windows
+- tmux prefix + d => detach session
+
+- tmux detach => detach current session
+
+- tmux prefix + c => create new window 
+- tmux prefix + p => go to next window
+- tmux prefix + n => go to prev window
+
+- tmux prefix + % => split windows
+
+- man tmux
+
+
+## CLI piping
+
+
+
