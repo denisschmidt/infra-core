@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
  
-languages=$(echo "golang typescript python node.js javascript react" | tr " " "\n")
+languages=$(echo "solidity git golang typescript python node.js javascript react" | tr " " "\n")
 core_utils=$(echo "find xargs sed awk" | tr " " "\n")
 selected=$(echo -e "$languages\n$core_utils" | fzf)
 
